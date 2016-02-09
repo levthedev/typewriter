@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			var cursor;
+			window.onload = init;
+
+			function $(id){
+				return document.getElementById(id);
+			}
+
+			function init(){
+				cursor = $("cursor");
+				cursor.style.left = "0px";
+			}
+
+			function newLineToBreak(text){
+				return text.replace(/\n/g, "<br />");
+			}
+
+			function writeit(from, e){
+				e = e || window.event;
+				var writer = $("writer");
+				var text = from.value;
+				writer.innerHTML = newLineToBreak(text);
+			}
+
+			function moveIt(count, e){
+				e = e || window.event;
+				var keycode = e.keyCode || e.which;
+				if(keycode == 37 && parseInt(cursor.style.left) >= (0-((count-1)*10))){
+					cursor.style.left = parseInt(cursor.style.left) - 10 + "px";
+				} else if(keycode == 39 && (parseInt(cursor.style.left) + 10) <= 0){
+					cursor.style.left = parseInt(cursor.style.left) + 10 + "px";
+				}
+			}
+		</script>
+
+		<style type="text/css">
+			body {
+				margin: 0px;
+				padding: 0px;
+				height: 99%;
+			}
+
+			textarea#setter  {
+				left: -1000px;
+				position: absolute;
+			}
+
+			.cursor {
+				font-size: 12px;
+				background-color: red;
+				color: red;
+				position: relative;
+				opacity: 0.5;
+			}
+
+			#terminal {
+				margin: 8px;
+				cursor: text;
+				height: 500px;
+        overflow: auto;
+			}
+
+			#writer {
+				font-family: cursor, courier;
+				font-weight: bold;
+			}
+
+      #getter {
+              margin: 5px;
+      }
+		</style>
+	</head>
+	<body>
+	<div id="terminal" onclick="$('setter').focus();">
+		<textarea type="text" id="setter" onkeydown="writeit(this, event);moveIt(this.value.length, event)" onkeyup="writeit(this, event)" onkeypress="writeit(this, event);"></textarea>
+		<div id="getter">
+			<span id="writer"></span><b class="cursor" id="cursor">B</b>
+		</div>
+	</div>
+	</body>
+</html>
