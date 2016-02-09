@@ -1,13 +1,9 @@
 #main {
     float: left;
     width: 100%;
+    font-family: courier;
 }
-#poem {
-    float: left;
-    width: 50%;
-    color: grey;
-    text-align: center;
-}
+
 #editor {
     float: left;
     width: 50%;
@@ -21,4 +17,8 @@
     height: 3em;
     margin-top: -3em;
     text-align: center;
+}
+
+#cursor {
+  letter-spacing: 0px;
 }
