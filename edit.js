@@ -71,6 +71,14 @@ function colorLetter(index, color) {
   var newSpan = document.getElementById(index);
   newSpan.style.color = color;
   if (color == "black") {
+    var currentLetter = document.getElementById(index);
+    var lastLetter = document.getElementById(index - 1);
+
+    currentLetter.style.letterSpacing = "-5px";
+    if (lastLetter) {
+      lastLetter.style.letterSpacing = "0px";
+    };
+
     var oldCursor = document.getElementById("cursor");
     oldCursor.parentElement.removeChild(oldCursor);
     var newCursor = document.createElement("span");
