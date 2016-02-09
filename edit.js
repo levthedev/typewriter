@@ -4,7 +4,6 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 var text = `A ghost, though invisible, still is like a place\nyour sight can knock on, echoing; but here\nwithin this thick black pelt, your strongest gaze\nwill be absorbed and utterly disappear `
-
 var letters = text.split('');
 var count = 0;
 var score = 0;
@@ -49,6 +48,9 @@ function appendLetterToDOM(letter, count) {
   span.style.color = "grey";
   div.appendChild(span)
   span.innerHTML = letter;
+  if (letter && letter.charCodeAt() == 10) {
+    span.innerHTML = "<br>";
+  }
 };
 
 function appendBreakToDOM() {
@@ -66,15 +68,16 @@ function updateScore(currentScore) {
 };
 
 function colorLetter(index, color) {
-  //var oldSpan = document.getElementById(index - 1);
-  var oldCursor = document.getElementById("cursor");
-  oldCursor.parentElement.removeChild(oldCursor);
   var newSpan = document.getElementById(index);
-  var newCursor = document.createElement("span");
-  newCursor.innerHTML = "|";
-  newCursor.id = "cursor";
-  newSpan.appendChild(newCursor);
   newSpan.style.color = color;
+  if (color == "black") {
+    var oldCursor = document.getElementById("cursor");
+    oldCursor.parentElement.removeChild(oldCursor);
+    var newCursor = document.createElement("span");
+    newCursor.innerHTML = "|";
+    newCursor.id = "cursor";
+    newSpan.appendChild(newCursor);
+  }
 };
 
 function cursorAnimation() {
